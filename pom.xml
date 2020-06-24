@@ -13,6 +13,7 @@
     <modules>
         <module>snack-machine-management</module>
         <module>shared-kernel</module>
+        <module>test-module</module>
     </modules>
 
 </project>
