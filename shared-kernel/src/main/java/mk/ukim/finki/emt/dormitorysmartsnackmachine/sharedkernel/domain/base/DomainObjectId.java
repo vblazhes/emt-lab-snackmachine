@@ -2,8 +2,10 @@ package mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.domain.base;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 import org.springframework.lang.NonNull;
 
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 import java.util.UUID;
 

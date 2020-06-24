@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.domain.base.AbstractAggregateRoot;
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.domain.base.ConcurrencySafeDomainObject;
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.domain.base.DeletableDomainObject;
+import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.domain.base.DomainObjectId;
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.financial.Money;
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.snackmachinemanagement.domain.model.identifier.SnackMachineId;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "snack-machine")
+@Table(name = "snack_machine")
 public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implements DeletableDomainObject,
         ConcurrencySafeDomainObject {
 
@@ -25,24 +26,29 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
 
     //Can be changed to Points
     @Embedded
-    @AttributeOverride(name = "amount", column = @Column(name = "amount"))
-    @Column(name = "totalBudget", nullable = false)
+    @AttributeOverride(name = "amount", column = @Column(name = "total_budget"))
     private Money totalBudget;
 
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Slot> slots;
+    private Set<Slot> slots;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Purchase> purchases;
+    private Set<Purchase> purchases;
 
 //    @SuppressWarnings("unused") // Used by JPA only
     private SnackMachine(){
-        this.totalBudget = new Money(0);
+
     }
 
+    public SnackMachine(Money totalBudget, Set<Slot> slots, Set<Purchase> purchases) {
+        super(DomainObjectId.randomId(SnackMachineId.class));
+//        this.totalBudget = totalBudget;
+        this.slots = slots;
+        this.purchases = purchases;
+    }
 
     @Override
     public Long version() {
@@ -60,11 +66,11 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
         this.deleted = true;
     }
 
-    public Money getTotalBudget() {
-        return totalBudget;
-    }
-
-    public void setTotalBudget(Money totalBudget) {
-        this.totalBudget = totalBudget;
-    }
+//    public Money getTotalBudget() {
+//        return totalBudget;
+//    }
+//
+//    public void setTotalBudget(Money totalBudget) {
+//        this.totalBudget = totalBudget;
+//    }
 }

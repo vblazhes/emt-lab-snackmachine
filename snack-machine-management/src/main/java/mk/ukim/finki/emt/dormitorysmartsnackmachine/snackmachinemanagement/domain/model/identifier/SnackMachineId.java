@@ -12,6 +12,9 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class SnackMachineId extends DomainObjectId {
+
+    private String id;
+
     @JsonCreator
     protected SnackMachineId(String uuid) {
         super(uuid);

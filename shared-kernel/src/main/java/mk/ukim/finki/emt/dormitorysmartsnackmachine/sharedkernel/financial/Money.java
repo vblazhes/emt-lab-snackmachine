@@ -6,19 +6,20 @@ import lombok.NonNull;
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.domain.base.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
 /**
  * Value object representing an amount of money. The amount is stored as a fixed-point integer where the last two digits
  * represent the decimals.
  */
-@Getter
 @Embeddable
+@Getter
 public class Money implements ValueObject {
 
     // It could have PaymentMethod enum (Points/Bills) and amount
 
-    @JsonProperty("amount")
+//    @JsonProperty("amount")
     private final int amount;
 
 

@@ -20,13 +20,13 @@ public class Slot extends AbstractAggregateRoot<SlotId> implements ConcurrencySa
     @Version
     private Long version;
 
-    @Embedded
-    @AttributeOverride(name="id",column = @Column(name="snack_id",nullable = false))
+    @Column(name="snack_id",nullable = false)
     private SnackId snackId;
 
     private int position;
 
     @Embedded
+    @AttributeOverride(name = "amount",column = @Column(name = "price", nullable = false))
     private Money price;
 
 

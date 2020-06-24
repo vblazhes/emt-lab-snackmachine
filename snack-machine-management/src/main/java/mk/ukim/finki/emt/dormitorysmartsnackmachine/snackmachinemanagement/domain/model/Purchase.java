@@ -29,11 +29,10 @@ public class Purchase extends AbstractEntity<PurchaseId>  implements Concurrency
     @Column(name = "purchased_on", nullable = false)
     private Instant purchasedOn;
 
-    @Embedded
-    @AttributeOverride(name="id",column = @Column(name="student_card_id",nullable = false))
+    @Column(name="student_card_id",nullable = false)
     private StudentCardId studentCardId;
 
-
+    @Column(name="slot_id",nullable = false)
     private SlotId slotId;
 
 
