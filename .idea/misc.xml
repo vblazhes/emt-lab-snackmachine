@@ -12,6 +12,12 @@
         <option value="$PROJECT_DIR$/shared-kernel/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/snack/pom.xml" />
+        <option value="$PROJECT_DIR$/test-module/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11 (3)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

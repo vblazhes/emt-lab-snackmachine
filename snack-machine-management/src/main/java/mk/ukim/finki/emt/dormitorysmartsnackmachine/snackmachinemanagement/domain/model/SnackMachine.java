@@ -9,6 +9,7 @@ import mk.ukim.finki.emt.dormitorysmartsnackmachine.sharedkernel.financial.Money
 import mk.ukim.finki.emt.dormitorysmartsnackmachine.snackmachinemanagement.domain.model.identifier.SnackMachineId;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -17,7 +18,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "snack_machine")
+@Table(name = "snack_machines")
 public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implements DeletableDomainObject,
         ConcurrencySafeDomainObject {
 
@@ -32,11 +33,21 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Slot> slots;
+    @OneToMany(
+            mappedBy = "snackMachine",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Slot> slots = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Purchase> purchases;
+    @OneToMany(
+            mappedBy = "snackMachine",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Purchase> purchases = new HashSet<>();
 
 //    @SuppressWarnings("unused") // Used by JPA only
     private SnackMachine(){

@@ -9,9 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="snack-machine-management" />
         <module name="shared-kernel" />
-        <module name="test-module" />
+        <module name="snack" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="snack" target="1.5" />
+      <module name="test-module" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

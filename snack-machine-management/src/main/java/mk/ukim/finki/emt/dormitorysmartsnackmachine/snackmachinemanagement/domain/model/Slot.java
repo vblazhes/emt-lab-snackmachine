@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "slot")
+@Table(name = "slots")
 public class Slot extends AbstractAggregateRoot<SlotId> implements ConcurrencySafeDomainObject {
 
     @Version
@@ -28,6 +28,12 @@ public class Slot extends AbstractAggregateRoot<SlotId> implements ConcurrencySa
     @Embedded
     @AttributeOverride(name = "amount",column = @Column(name = "price", nullable = false))
     private Money price;
+
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(name = "snack_machine_id")
+    private SnackMachine snackMachine;
 
 
     private Slot(){

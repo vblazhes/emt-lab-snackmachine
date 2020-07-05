@@ -35,6 +35,13 @@ public class Purchase extends AbstractEntity<PurchaseId>  implements Concurrency
     @Column(name="slot_id",nullable = false)
     private SlotId slotId;
 
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+            name="snack_machine_id"
+    )
+    private SnackMachine snackMachine;
 
     private Purchase(){
 
