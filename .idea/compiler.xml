@@ -7,19 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="snack-machine-management" />
-        <module name="shared-kernel" />
         <module name="snack" />
+        <module name="shared-kernel" />
+        <module name="snack-machine-management" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="snack" target="1.5" />
+      <module name="snack" target="11" />
       <module name="test-module" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="shared-kernel" options="-parameters" />
+      <module name="snack" options="-parameters" />
       <module name="snack-machine-management" options="-parameters" />
     </option>
   </component>
