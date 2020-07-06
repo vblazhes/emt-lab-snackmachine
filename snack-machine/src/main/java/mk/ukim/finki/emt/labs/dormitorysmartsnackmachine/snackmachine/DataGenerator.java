@@ -28,8 +28,6 @@ public class DataGenerator {
         if(snackMachineRepository.findAll().size() == 0){
             var snackMachine = new SnackMachine(new SnackMachineId("snackmachineid1"));
 
-            snackMachine = snackMachineRepository.save(snackMachine);
-
             Set<Slot> slots = new HashSet<>();
 
             slots.add(createSlot(new SlotId("slotId1"), new SnackId("1"), 1, new Money(15)));

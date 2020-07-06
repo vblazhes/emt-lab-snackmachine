@@ -3,6 +3,7 @@ package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.port.cont
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.SnackMachineService;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.dto.StudentCardDto;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,9 @@ public class SnackMachineController {
     }
 
     @GetMapping("/{id}")
-    public StudentCardDto insertStudentCard(@PathVariable("id") String studentCardId){
-        return snackMachineService.findStudentCardById(new StudentCardId(studentCardId));
+    public ResponseEntity<StudentCardDto> insertStudentCard(@PathVariable("id") String studentCardId){
+        return snackMachineService.findStudentCardById(new StudentCardId(studentCardId))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

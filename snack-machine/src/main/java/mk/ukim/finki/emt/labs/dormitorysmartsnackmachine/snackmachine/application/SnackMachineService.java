@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.validation.Validator;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,7 +26,7 @@ public class SnackMachineService {
         this.studentCard = studentCard;
     }
 
-    public StudentCardDto findStudentCardById(StudentCardId studentCardId){
+    public Optional<StudentCardDto> findStudentCardById(StudentCardId studentCardId){
         return studentCard.findById(studentCardId);
     }
 }

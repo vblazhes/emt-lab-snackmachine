@@ -37,13 +37,13 @@ public class Purchase extends AbstractEntity<PurchaseId> implements ConcurrencyS
     @AttributeOverride(name = "uuid", column = @Column(name="slot_id",nullable = false))
     private SlotId slotId;
 
-    @ManyToOne(
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-            name="snack_machine_id"
-    )
-    private SnackMachine snackMachine;
+//    @ManyToOne(
+//            fetch = FetchType.EAGER
+//    )
+//    @JoinColumn(
+//            name="snack_machine_id"
+//    )
+//    private SnackMachine snackMachine;
 
 
     public Purchase(){

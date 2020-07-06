@@ -33,7 +33,7 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
     private boolean deleted = false;
 
     @OneToMany(
-            mappedBy = "snackMachine",
+//            mappedBy = "snackMachine",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -41,7 +41,7 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
     private Set<Slot> slots = new HashSet<>();
 
     @OneToMany(
-            mappedBy = "snackMachine",
+//            mappedBy = "snackMachine",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true

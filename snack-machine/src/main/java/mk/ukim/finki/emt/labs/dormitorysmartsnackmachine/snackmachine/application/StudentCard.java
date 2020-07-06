@@ -3,6 +3,8 @@ package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.applicati
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.dto.StudentCardDto;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
 
+import java.util.Optional;
+
 public interface StudentCard {
-    StudentCardDto findById(StudentCardId studentCardId);
+    Optional<StudentCardDto> findById(StudentCardId studentCardId);
 }

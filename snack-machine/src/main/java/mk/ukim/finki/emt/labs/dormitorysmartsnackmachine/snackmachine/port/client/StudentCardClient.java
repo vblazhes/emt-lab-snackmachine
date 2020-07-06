@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Optional;
+
 @Service
 public class StudentCardClient implements StudentCard{
     private static final Logger LOGGER = LoggerFactory.getLogger(StudentCardClient.class);
@@ -41,17 +43,17 @@ public class StudentCardClient implements StudentCard{
     }
 
 
-    public StudentCardDto findById(StudentCardId id){
+    public Optional<StudentCardDto> findById(StudentCardId id){
         try{
             return restTemplate.exchange(
-                    uri().path("api/studentcards").build().toUri(),
+                    uri().path("/api/studentcards/" + id.getUuid()).build().toUri(),
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<StudentCardDto>() {
+                    new ParameterizedTypeReference<Optional<StudentCardDto>>() {
                     }).getBody();
         } catch(Exception ex){
             LOGGER.error("Error retrieving product by id", ex);
-            return null;
+            return Optional.empty();
         }
     }
 }

@@ -29,9 +29,9 @@ public class Slot extends AbstractAggregateRoot<SlotId> implements ConcurrencySa
     @AttributeOverride(name = "amount",column = @Column(name = "price", nullable = false))
     private Money price;
 
-    @ManyToOne
-    @JoinColumn(name = "snack_machine_id", referencedColumnName = "uuid")
-    private SnackMachine snackMachine;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "snack_machine_id", referencedColumnName = "uuid")
+//    private SnackMachine snackMachine;
 
 
     protected Slot(){
@@ -56,6 +56,14 @@ public class Slot extends AbstractAggregateRoot<SlotId> implements ConcurrencySa
     public Money getPrice() {
         return price;
     }
+
+//    public SnackMachine getSnackMachine() {
+//        return snackMachine;
+//    }
+//
+//    public void setSnackMachine(SnackMachine snackMachine) {
+//        this.snackMachine = snackMachine;
+//    }
 
     @Override
     public Long version() {

@@ -50,4 +50,8 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
     public void delete() {
 
     }
+
+    public Money getBalance() {
+        return balance;
+    }
 }
