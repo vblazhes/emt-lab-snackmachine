@@ -21,7 +21,7 @@ class ProcessedRemoteEvent implements IdentifiableDomainObject<String> {
     @Column(name = "source", nullable = false)
     private String source;
 
-    @Column(name = "last_processed_event_d", nullable = false)
+    @Column(name = "last_processed_event_id", nullable = false)
     private long lastProcessedEventId;
 
     @SuppressWarnings("unused") // Used by JPA only

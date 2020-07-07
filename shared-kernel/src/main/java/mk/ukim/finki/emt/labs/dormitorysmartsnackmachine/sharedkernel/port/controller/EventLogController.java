@@ -1,4 +1,4 @@
-package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.port;
+package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.port.controller;
 
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.infra.eventlog.DomainEventLogService;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.infra.eventlog.StoredDomainEvent;

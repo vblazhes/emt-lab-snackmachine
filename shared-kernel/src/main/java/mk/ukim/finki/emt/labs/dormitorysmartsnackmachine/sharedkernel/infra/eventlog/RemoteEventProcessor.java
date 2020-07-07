@@ -1,5 +1,7 @@
 package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.infra.eventlog;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,6 +15,8 @@ import java.util.Map;
 
 @Service
 public class RemoteEventProcessor {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RemoteEventProcessor.class);
 
     private final ProcessedRemoteEventRepository processedRemoteEventRepository;
     private final Map<String, RemoteEventLogService> remoteEventLogs;
@@ -39,7 +43,7 @@ public class RemoteEventProcessor {
     }
 
     private void processEvents(@NonNull RemoteEventLogService remoteEventLogService) {
-
+        LOGGER.info("Processing remote events from {}", remoteEventLogService.source());
         var log = remoteEventLogService.currentLog(getLastProcessedId(remoteEventLogService));
 
         processEvents(remoteEventLogService, log.events());

@@ -1,12 +1,11 @@
-package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier;
+package mk.ukim.finki.emt.labs.dormitorysnackmachine.snack.domain.model.identifier;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.base.DomainObjectId;
-import org.springframework.lang.NonNull;
 
 public class PurchaseId extends DomainObjectId {
 
-    public PurchaseId(@NonNull String uuid) {
+    public PurchaseId(String uuid) {
         super(uuid);
     }
 

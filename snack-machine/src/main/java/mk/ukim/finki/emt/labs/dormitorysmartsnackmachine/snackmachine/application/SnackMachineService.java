@@ -1,11 +1,15 @@
 package mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application;
 
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.financial.Money;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.dto.PurchaseDto;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.dto.StudentCardDto;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.exception.NotSufficientStudentCardBalance;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.event.PurchaseForSnackCreated;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.event.PurchaseForStudentCardCreated;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Purchase;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Slot;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.SnackMachine;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.PurchaseId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.repository.PurchaseRepository;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.repository.SlotRepository;
@@ -53,7 +57,7 @@ public class SnackMachineService {
         return studentCard.findById(studentCardId);
     }
 
-    public void createPurchase(@NonNull PurchaseDto purchaseDto){
+    public PurchaseId createPurchase(@NonNull PurchaseDto purchaseDto){
         Objects.requireNonNull(purchaseDto, "purchase must be non null");
 
         var constraintsViolations = validator.validate(purchaseDto);
@@ -67,9 +71,20 @@ public class SnackMachineService {
             throw new IllegalArgumentException();
         }
 
+        StudentCardDto studentCardDto = studentCard.findById(new StudentCardId(purchaseDto.studentCardId)).get();
+
+        Money snackPrice = slot.getPrice();
+        Money studentBalance = studentCardDto.balance;
+
+        if(!studentBalance.isGreaterOrEqualThan(snackPrice)){
+            throw new NotSufficientStudentCardBalance();
+        }
+
         var newPurchase = purchaseRepository.saveAndFlush(toDomainModel(purchaseDto, slot));
 
-//        applicationEventPublisher.publishEvent(new PurchaseForSnackCreated(newPurchase.id()));
+        applicationEventPublisher.publishEvent(new PurchaseForSnackCreated(newPurchase.id(), newPurchase.getOccurredOn(), slot.getSnackId()));
+
+        return newPurchase.id();
     }
 
     @NonNull
