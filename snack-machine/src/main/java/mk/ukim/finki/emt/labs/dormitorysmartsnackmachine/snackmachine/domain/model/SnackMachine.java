@@ -32,21 +32,21 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 
-    @OneToMany(
-//            mappedBy = "snackMachine",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Slot> slots = new HashSet<>();
-
-    @OneToMany(
-//            mappedBy = "snackMachine",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Purchase> purchases = new HashSet<>();
+//    @OneToMany(
+////            mappedBy = "snackMachine",
+//            fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    private Set<Slot> slots = new HashSet<>();
+//
+//    @OneToMany(
+////            mappedBy = "snackMachine",
+//            fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    private Set<Purchase> purchases = new HashSet<>();
 
 //    @SuppressWarnings("unused") // Used by JPA only
     public SnackMachine(){
@@ -60,16 +60,16 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
     public SnackMachine(Set<Slot> slots) {
         super(DomainObjectId.randomId(SnackMachineId.class));
 //        this.totalBudget = totalBudget;
-        this.slots = slots;
+//        this.slots = slots;
     }
 
-    public void setSlots(Set<Slot> slots) {
-        this.slots = slots;
-    }
-
-    public void addPurchase(Purchase newPurchase){
-        this.purchases.add(newPurchase);
-    }
+//    public void setSlots(Set<Slot> slots) {
+//        this.slots = slots;
+//    }
+//
+//    public void addPurchase(Purchase newPurchase){
+//        this.purchases.add(newPurchase);
+//    }
 
     @Override
     public Long version() {

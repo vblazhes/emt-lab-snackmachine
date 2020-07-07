@@ -7,14 +7,14 @@ import org.springframework.lang.NonNull;
 
 import java.time.Instant;
 
-public class PurchaseCreated implements DomainEvent {
+public class PurchaseForSnackCreated implements DomainEvent {
     @JsonProperty("purchaseId")
     private final PurchaseId purchaseId;
 
     @JsonProperty("occurredOn")
     private final Instant occurredOn;
 
-    public PurchaseCreated(@NonNull PurchaseId purchaseId,@NonNull Instant occurredOn) {
+    public PurchaseForSnackCreated(@NonNull PurchaseId purchaseId, @NonNull Instant occurredOn) {
         this.purchaseId = purchaseId;
         this.occurredOn = occurredOn;
     }

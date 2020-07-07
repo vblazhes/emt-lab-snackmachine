@@ -5,7 +5,8 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.bas
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.base.DomainObjectId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.financial.Money;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.PurchaseId;
-import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.SlotId;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.SnackId;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.SnackMachineId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
 
 import javax.persistence.*;
@@ -24,54 +25,51 @@ public class Purchase extends AbstractEntity<PurchaseId> implements ConcurrencyS
 
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "amount"))
-    private Money amount;
+    private Money price;
 
-    @Column(name = "purchased_on", nullable = false)
-    private Instant purchasedOn;
+    @Column(name = "occurred_on", nullable = false)
+    private Instant occurredOn;
 
     @Embedded
     @AttributeOverride(name = "uuid", column = @Column(name="student_card_id",nullable = false))
     private StudentCardId studentCardId;
 
     @Embedded
-    @AttributeOverride(name = "uuid", column = @Column(name="slot_id",nullable = false))
-    private SlotId slotId;
+    @AttributeOverride(name = "uuid", column = @Column(name="snack_id",nullable = false))
+    private SnackId snackId;
 
-//    @ManyToOne(
-//            fetch = FetchType.EAGER
-//    )
-//    @JoinColumn(
-//            name="snack_machine_id"
-//    )
-//    private SnackMachine snackMachine;
+    @Embedded
+    @AttributeOverride(name = "uuid",column = @Column(name = "snack_machine_id", nullable = false))
+    private SnackMachineId snackMachineId;
 
 
     public Purchase(){
 
     }
 
-    public Purchase(PurchaseId id, Money amount, Instant purchasedOn, StudentCardId studentCardId, SlotId slotId) {
+    public Purchase(Instant purchasedOn, Money price, StudentCardId studentCardId, SnackId snackId, SnackMachineId snackMachineId) {
         super(DomainObjectId.randomId(PurchaseId.class));
-        this.amount = amount;
-        this.purchasedOn = purchasedOn;
+        this.price = price;
+        this.occurredOn = purchasedOn;
         this.studentCardId = studentCardId;
-        this.slotId = slotId;
+        this.snackId = snackId;
+        this.snackMachineId = snackMachineId;
     }
 
-    public Money getAmount() {
-        return amount;
+    public Money getPrice() {
+        return price;
     }
 
-    public Instant getPurchasedOn() {
-        return purchasedOn;
+    public Instant getOccurredOn() {
+        return occurredOn;
     }
 
     public StudentCardId getStudentCardId() {
         return studentCardId;
     }
 
-    public SlotId getSlotId() {
-        return slotId;
+    public SnackId getSnackId() {
+        return snackId;
     }
 
     @Override
