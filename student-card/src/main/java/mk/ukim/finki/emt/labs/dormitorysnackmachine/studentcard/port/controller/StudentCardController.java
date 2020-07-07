@@ -24,4 +24,12 @@ public class StudentCardController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+//    @GetMapping("/purchase/{id}")
+//    public ResponseEntity<StudentCardDto> canPurchaseBeMade(@PathVariable("id") String studentCardId){
+//        return studentCardService.canPurchaseBeMade(new StudentCardId(studentCardId))
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
+
 }

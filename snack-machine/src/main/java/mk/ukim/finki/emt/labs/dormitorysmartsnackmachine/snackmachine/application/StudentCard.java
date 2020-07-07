@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface StudentCard {
     Optional<StudentCardDto> findById(StudentCardId studentCardId);
+//    boolean canPurchaseBeMade(StudentCardId studentCardId);
 }

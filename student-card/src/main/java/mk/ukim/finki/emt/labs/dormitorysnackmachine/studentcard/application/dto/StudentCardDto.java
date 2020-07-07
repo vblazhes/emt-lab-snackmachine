@@ -6,4 +6,5 @@ import mk.ukim.finki.emt.labs.dormitorysnackmachine.studentcard.domain.model.ide
 public class StudentCardDto {
     public StudentCardId studentCardId;
     public Money balance;
+    public int numberOfPurchases;
 }

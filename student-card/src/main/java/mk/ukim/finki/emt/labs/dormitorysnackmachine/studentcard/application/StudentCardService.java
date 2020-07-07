@@ -22,21 +22,33 @@ public class StudentCardService {
     }
 
     public Optional<StudentCardDto> findStudentCardById(@NonNull StudentCardId studentCardId){
-        Objects.requireNonNull(studentCardId, "productId must be non null");
+        Objects.requireNonNull(studentCardId, "studentCardId must be non null");
         return studentCardRepository
                 .findById(studentCardId)
                 .map(studentCard -> {
                     StudentCardDto studentCardDto = new StudentCardDto();
                     studentCardDto.balance = studentCard.getBalance();
                     studentCardDto.studentCardId = studentCard.id();
+                    studentCardDto.numberOfPurchases = studentCard.getNumberOfPurchases();
                     return studentCardDto;
                 });
     }
+
+//    public Boolean canPurchaseBeMade(@NonNull StudentCardId studentCardId){
+//        Objects.requireNonNull(studentCardId, "studentCardId must be non null");
+//
+//        Optional<StudentCard> studentCard = studentCardRepository.findById(studentCardId);
+//
+//        return false;
+//    }
+
+
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onPurchaseCreatedEvent(PurchaseCreatedEvent event){
         StudentCard studentCard = studentCardRepository.findById(event.getStudentCardId()).orElseThrow(RuntimeException::new);
         studentCard.subtractBalance(event.getAmount());
+        studentCard.addPurchasesPerOne();
         studentCardRepository.save(studentCard);
     }
 }

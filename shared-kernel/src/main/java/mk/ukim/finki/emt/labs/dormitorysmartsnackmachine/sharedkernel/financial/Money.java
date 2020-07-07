@@ -54,6 +54,11 @@ public class Money implements ValueObject {
         return this.amount >= money.amount;
     }
 
+    @NonNull
+    public boolean isGreaterOrEqualThanMinus100MKD(Money money){
+        return this.subtract(money).amount > - 100;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

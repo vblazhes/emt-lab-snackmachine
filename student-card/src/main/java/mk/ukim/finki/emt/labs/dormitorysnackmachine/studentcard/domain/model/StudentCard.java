@@ -18,6 +18,8 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
 
     private String surname;
 
+    private int numberOfPurchases;
+
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "balance"))
     private Money balance;
@@ -34,6 +36,7 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
         this.name = name;
         this.surname = surname;
         this.balance = balance;
+        numberOfPurchases = 0;
     }
 
     @Override
@@ -60,6 +63,16 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
     }
 
     public void subtractBalance(Money money){
-        balance = balance.subtract(money);
+        if(numberOfPurchases != 10){
+            balance = balance.subtract(money);
+        }
+    }
+
+    public void addPurchasesPerOne(){
+        numberOfPurchases = (numberOfPurchases + 1)%11;
+    }
+
+    public int getNumberOfPurchases() {
+        return numberOfPurchases;
     }
 }

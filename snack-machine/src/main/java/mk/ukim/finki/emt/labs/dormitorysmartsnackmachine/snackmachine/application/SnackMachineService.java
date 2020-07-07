@@ -75,9 +75,14 @@ public class SnackMachineService {
 
         Money snackPrice = slot.getPrice();
         Money studentBalance = studentCardDto.balance;
+        int numberOfPurchases = studentCardDto.numberOfPurchases;
 
         if(!studentBalance.isGreaterOrEqualThan(snackPrice)){
-            throw new NotSufficientStudentCardBalance();
+            if(!studentBalance.isGreaterOrEqualThanMinus100MKD(snackPrice)){
+                if(numberOfPurchases != 10){
+                    throw new NotSufficientStudentCardBalance();
+                }
+            }
         }
 
         var newPurchase = purchaseRepository.saveAndFlush(toDomainModel(purchaseDto, slot));

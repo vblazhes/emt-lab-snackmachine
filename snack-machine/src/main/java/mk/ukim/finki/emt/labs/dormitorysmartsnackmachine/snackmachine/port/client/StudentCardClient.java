@@ -56,4 +56,19 @@ public class StudentCardClient implements StudentCard{
             return Optional.empty();
         }
     }
+
+//    @Override
+//    public boolean canPurchaseBeMade(StudentCardId studentCardId) {
+//        try{
+//            return restTemplate.exchange(
+//                    uri().path("/api/studentcards/purchase/" + studentCardId.getUuid()).build().toUri(),
+//                    HttpMethod.GET,
+//                    null,
+//                    new ParameterizedTypeReference<Boolean>() {
+//                    }).getBody();
+//        } catch(Exception ex){
+//            LOGGER.error("Error: ", ex);
+//            return false;
+//        }
+//    }
 }
