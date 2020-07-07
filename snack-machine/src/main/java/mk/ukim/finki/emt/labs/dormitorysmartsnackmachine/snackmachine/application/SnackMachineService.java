@@ -83,6 +83,7 @@ public class SnackMachineService {
         var newPurchase = purchaseRepository.saveAndFlush(toDomainModel(purchaseDto, slot));
 
         applicationEventPublisher.publishEvent(new PurchaseForSnackCreated(newPurchase.id(), newPurchase.getOccurredOn(), slot.getSnackId()));
+        applicationEventPublisher.publishEvent(new PurchaseForStudentCardCreated(newPurchase.id(), newPurchase.getOccurredOn(), new StudentCardId(purchaseDto.studentCardId), slot.getPrice()));
 
         return newPurchase.id();
     }

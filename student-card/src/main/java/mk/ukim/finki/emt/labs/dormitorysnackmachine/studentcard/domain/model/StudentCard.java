@@ -54,4 +54,12 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
     public Money getBalance() {
         return balance;
     }
+
+    public void addBalance(Money money){
+        balance.add(money);
+    }
+
+    public void subtractBalance(Money money){
+        balance = balance.subtract(money);
+    }
 }
