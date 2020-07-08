@@ -96,8 +96,4 @@ A simple application that implements Domain Driven Design
         - GET: http://localhost:8083/api/studentcards
 
 # Demo
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="demo-video/poster.png">
-    <source src="demo-video/demo.mp4" type="video/mp4">
-  </video>
-</figure>
+![demo gif](images/demo-gif.gif)
