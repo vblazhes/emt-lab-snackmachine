@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -50,5 +51,9 @@ public class StudentCardService {
         studentCard.subtractBalance(event.getAmount());
         studentCard.addPurchasesPerOne();
         studentCardRepository.save(studentCard);
+    }
+
+    public List<StudentCard> getAllStudentCards() {
+        return studentCardRepository.findAll();
     }
 }

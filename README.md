@@ -71,3 +71,22 @@ A simple application that implements Domain Driven Design
     - Quantity
         - ```Quantity subtractQuantityPerOne()```
         - ```Quantity addQuantity(int quantity)```
+        
+        
+
+- **ENDPOINTS**:
+    - **SnackMachine**
+        - GET: http://localhost:8081/api/snackmachine/id
+            - id - StudentCardId
+        - POST: http://localhost:8081/api/snackmachine/purchase
+            - JSON Body - {studentCardId: "...", slotPosition: "..."}
+        - GET: http://localhost:8081/api/snackmachine/slots
+        - GET: http://localhost:8081/api/snachmachine
+      
+    - **Snack**
+        - GET: http://localhost:8082/api/snacks
+    
+    - **StudentCard**
+        - GET: http://localhost:8083/api/studentcards/id
+            - id - StudentCardId
+        - GET: http://localhost:8083/api/studentcards

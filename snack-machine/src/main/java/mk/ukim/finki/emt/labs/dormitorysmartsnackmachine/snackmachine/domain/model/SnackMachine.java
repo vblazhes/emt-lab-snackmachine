@@ -55,6 +55,7 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
 
     public SnackMachine(SnackMachineId snackMachineId){
         super(snackMachineId);
+        this.profit = new Money(0);
     }
 
     public SnackMachine(Set<Slot> slots) {

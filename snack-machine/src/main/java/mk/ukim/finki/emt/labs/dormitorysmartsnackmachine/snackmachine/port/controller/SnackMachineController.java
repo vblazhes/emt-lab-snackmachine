@@ -34,7 +34,7 @@ public class SnackMachineController {
         return ResponseEntity.ok(purchaseDto);
     }
 
-    @GetMapping
+    @GetMapping("/slots")
     public ResponseEntity<List<Slot>> getAllSlots(){
         return ResponseEntity.ok(snackMachineService.getAllSlots());
     }

@@ -26,4 +26,8 @@ public class Quantity implements ValueObject {
     public Quantity addQuantity(int quantity){
         return new Quantity(this.quantity + quantity);
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
