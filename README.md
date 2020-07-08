@@ -97,7 +97,7 @@ A simple application that implements Domain Driven Design
 
 # Demo
 <figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="demo-video/poster.png">
-    <source src="demo-video/demo.mp4" type="video/mp4">
+  <video controls="true" allowfullscreen="true" poster="https://github.com/vblazhes/emt-lab-snackmachine/blob/master/demo-video/poster.png">
+    <source src="https://github.com/vblazhes/emt-lab-snackmachine/blob/master/demo-video/Demo.mp4" type="video/mp4">
   </video>
 </figure>
