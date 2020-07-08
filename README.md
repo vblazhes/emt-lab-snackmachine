@@ -48,4 +48,5 @@ A simple application that implements Domain Driven Design
 
 Сите од горенаведените прашања ќе бидат одговорени со следниот дијаграм:
 
+![Dormitory Snack Machine Diagram](https://github.com/vblazhes/emt-lab-snackmachine/blob/master/images/Dormitory%20Smart%20Snack%20Machines.png)
 
