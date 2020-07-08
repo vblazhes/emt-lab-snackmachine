@@ -81,10 +81,14 @@ A simple application that implements Domain Driven Design
         - POST: http://localhost:8081/api/snackmachine/purchase
             - JSON Body - {studentCardId: "...", slotPosition: "..."}
         - GET: http://localhost:8081/api/snackmachine/slots
+        - GET: http://localhost:8081/api/snackmachine/slots/id
+            - id - SlotId
         - GET: http://localhost:8081/api/snachmachine
       
     - **Snack**
         - GET: http://localhost:8082/api/snacks
+        - GET: http://localhost:8082/api/snacks/id
+            - id - SnackId
     
     - **StudentCard**
         - GET: http://localhost:8083/api/studentcards/id

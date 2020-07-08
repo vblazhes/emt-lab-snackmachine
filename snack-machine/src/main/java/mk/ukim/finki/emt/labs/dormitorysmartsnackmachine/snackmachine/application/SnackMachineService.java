@@ -10,6 +10,7 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.mod
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Slot;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.SnackMachine;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.PurchaseId;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.SlotId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.repository.PurchaseRepository;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.repository.SlotRepository;
@@ -106,6 +107,10 @@ public class SnackMachineService {
 
     public List<Slot> getAllSlots(){
         return slotRepository.findAll();
+    }
+
+    public Optional<Slot> getSlotById(@NonNull SlotId slotId){
+        return slotRepository.findById(slotId);
     }
 
     public SnackMachine getSnackMachine() {

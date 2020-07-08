@@ -6,6 +6,7 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.applicatio
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Purchase;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Slot;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.SnackMachine;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.SlotId;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,13 @@ public class SnackMachineController {
     @GetMapping("/slots")
     public ResponseEntity<List<Slot>> getAllSlots(){
         return ResponseEntity.ok(snackMachineService.getAllSlots());
+    }
+
+    @GetMapping("/slots/{id}")
+    public ResponseEntity<Slot> getSlotById(@PathVariable("id") String slotId){
+        return snackMachineService.getSlotById(new SlotId(slotId))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
