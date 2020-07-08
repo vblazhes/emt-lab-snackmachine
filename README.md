@@ -50,3 +50,24 @@ A simple application that implements Domain Driven Design
 
 ![Dormitory Snack Machine Diagram](https://github.com/vblazhes/emt-lab-snackmachine/blob/master/images/Dormitory%20Smart%20Snack%20Machines.png)
 
+* **Идентификувајте неколку правила за конзистентност (бизнис правила) во сценариото. Специфицирајте кој ентитет ќе ги поседува имплементациите на истите?**
+
+    - Купувањето ќе може да се оствари само доколку студентот има доволно салдо на студентската картичка (SnackMachine го праша StudentCard за балансот на студентот)
+    - Продуктот не може да биде купен доколку го немам на слотот (SnackMachine го праша Snack за количината)
+    - Може да купи доколку нема доволно средства, но да не надмине повеќе од 100 денари од месечното салдо на сметката (секој месец студентскиот дом уплаќа точно дефинирана сума на пари)(SnackMachine, StudentCard)
+    - Доколку студентот купил 10 продукти, наредниот го добива бесплатно (SnackMachine, StudentCard)
+
+* **Идентификувајте неколку вредносни објекти (value-objects) во вашето сценарио. Кои методи би ги имплементирале?**
+
+    - Money
+        - ```Money subtract(Money money)``` 
+        - ```Money add(Money money)```
+        - ```Money multiply(int multiplicand)```
+        - ```boolean isGreaterOrEqualThan(Money money)```
+        - ```boolean isGreaterOrEqualThanMinus100MKD(Money money)```
+    - PurchaseNumber
+        - ```PurchaseNumber addOne()```
+    - FullName
+    - Quantity
+        - ```Quantity subtractQuantityPerOne()```
+        - ```Quantity addQuantity(int quantity)```

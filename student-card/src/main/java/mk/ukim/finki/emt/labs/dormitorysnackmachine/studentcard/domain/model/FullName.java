@@ -31,18 +31,10 @@ public class FullName implements ValueObject {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @NonNull
     @JsonProperty("surname")
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     @Override
