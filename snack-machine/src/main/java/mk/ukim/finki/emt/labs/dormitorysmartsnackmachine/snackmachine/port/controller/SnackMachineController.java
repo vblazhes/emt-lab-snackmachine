@@ -4,9 +4,13 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.applicatio
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.dto.PurchaseDto;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.application.dto.StudentCardDto;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Purchase;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.Slot;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.SnackMachine;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.StudentCardId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/snackmachine")
@@ -28,5 +32,15 @@ public class SnackMachineController {
     public ResponseEntity<PurchaseDto> insertStudentCard(@RequestBody PurchaseDto purchaseDto){
         snackMachineService.createPurchase(purchaseDto);
         return ResponseEntity.ok(purchaseDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Slot>> getAllSlots(){
+        return ResponseEntity.ok(snackMachineService.getAllSlots());
+    }
+
+    @GetMapping
+    public ResponseEntity<SnackMachine> getSnackMachine(){
+        return ResponseEntity.ok(snackMachineService.getSnackMachine());
     }
 }

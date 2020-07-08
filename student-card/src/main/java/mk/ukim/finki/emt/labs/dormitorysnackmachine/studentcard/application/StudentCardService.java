@@ -29,7 +29,7 @@ public class StudentCardService {
                     StudentCardDto studentCardDto = new StudentCardDto();
                     studentCardDto.balance = studentCard.getBalance();
                     studentCardDto.studentCardId = studentCard.id();
-                    studentCardDto.numberOfPurchases = studentCard.getNumberOfPurchases();
+                    studentCardDto.numberOfPurchases = studentCard.getPurchaseNumber().getNumberOfPurchases();
                     return studentCardDto;
                 });
     }

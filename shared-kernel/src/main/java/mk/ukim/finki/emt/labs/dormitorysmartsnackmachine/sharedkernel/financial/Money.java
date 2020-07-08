@@ -40,7 +40,6 @@ public class Money implements ValueObject {
     @NonNull
     public Money subtract(Money other) {
         Objects.requireNonNull(other, "other must not be null");
-
         return new Money(amount - other.amount);
     }
 

@@ -10,7 +10,7 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.mod
 import javax.persistence.*;
 
 /**
- * Entity representing a slot in the snack machine management.
+ * Entity representing a slot in the snack machine.
  */
 
 @Entity
@@ -59,13 +59,17 @@ public class Slot extends AbstractAggregateRoot<SlotId> implements ConcurrencySa
         return price;
     }
 
-//    public SnackMachine getSnackMachine() {
-//        return snackMachine;
-//    }
-//
-//    public void setSnackMachine(SnackMachine snackMachine) {
-//        this.snackMachine = snackMachine;
-//    }
+    public Long getVersion() {
+        return version;
+    }
+
+    public SnackMachineId getSnackMachineId() {
+        return snackMachineId;
+    }
+
+    public void setSnackMachineId(SnackMachineId snackMachineId) {
+        this.snackMachineId = snackMachineId;
+    }
 
     @Override
     public Long version() {

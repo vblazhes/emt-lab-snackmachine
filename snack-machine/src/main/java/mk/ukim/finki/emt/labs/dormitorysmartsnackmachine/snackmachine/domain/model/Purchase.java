@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.time.Instant;
 
 /**
- * Entity representing a purchase in the snack machine management.
+ * Entity representing a purchase in the snack machine.
  */
 
 @Entity
@@ -25,7 +25,7 @@ public class Purchase extends AbstractEntity<PurchaseId> implements ConcurrencyS
 
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "amount"))
-    private Money price;
+    private Money amount;
 
     @Column(name = "occurred_on", nullable = false)
     private Instant occurredOn;
@@ -47,33 +47,57 @@ public class Purchase extends AbstractEntity<PurchaseId> implements ConcurrencyS
 
     }
 
-    public Purchase(Instant purchasedOn, Money price, StudentCardId studentCardId, SnackId snackId, SnackMachineId snackMachineId) {
+    public Purchase(Instant purchasedOn, Money amount, StudentCardId studentCardId, SnackId snackId, SnackMachineId snackMachineId) {
         super(DomainObjectId.randomId(PurchaseId.class));
-        this.price = price;
+        this.amount = amount;
         this.occurredOn = purchasedOn;
         this.studentCardId = studentCardId;
         this.snackId = snackId;
         this.snackMachineId = snackMachineId;
     }
 
-    public Money getPrice() {
-        return price;
+    public Money getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Money amount) {
+        this.amount = amount;
     }
 
     public Instant getOccurredOn() {
         return occurredOn;
     }
 
+    public void setOccurredOn(Instant occurredOn) {
+        this.occurredOn = occurredOn;
+    }
+
     public StudentCardId getStudentCardId() {
         return studentCardId;
+    }
+
+    public void setStudentCardId(StudentCardId studentCardId) {
+        this.studentCardId = studentCardId;
     }
 
     public SnackId getSnackId() {
         return snackId;
     }
 
+    public void setSnackId(SnackId snackId) {
+        this.snackId = snackId;
+    }
+
     @Override
     public Long version() {
         return version;
+    }
+
+    public SnackMachineId getSnackMachineId() {
+        return snackMachineId;
+    }
+
+    public void setSnackMachineId(SnackMachineId snackMachineId) {
+        this.snackMachineId = snackMachineId;
     }
 }

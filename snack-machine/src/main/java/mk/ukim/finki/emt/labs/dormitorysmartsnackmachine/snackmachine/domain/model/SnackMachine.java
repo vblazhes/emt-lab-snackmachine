@@ -5,6 +5,7 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.bas
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.base.ConcurrencySafeDomainObject;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.base.DeletableDomainObject;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.domain.base.DomainObjectId;
+import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.financial.Money;
 import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.snackmachine.domain.model.identifier.SnackMachineId;
 
 import javax.persistence.*;
@@ -24,10 +25,9 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
     @Version
     private Long version;
 
-    //Can be changed to Points
-//    @Embedded
-//    @AttributeOverride(name = "amount", column = @Column(name = "total_budget"))
-//    private Money totalBudget;
+    @Embedded
+    @AttributeOverride(name = "amount", column = @Column(name = "profit"))
+    private Money profit;
 
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
@@ -48,7 +48,7 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
 //    )
 //    private Set<Purchase> purchases = new HashSet<>();
 
-//    @SuppressWarnings("unused") // Used by JPA only
+    @SuppressWarnings("unused") // Used by JPA only
     public SnackMachine(){
         super(DomainObjectId.randomId(SnackMachineId.class));
     }
@@ -59,8 +59,7 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
 
     public SnackMachine(Set<Slot> slots) {
         super(DomainObjectId.randomId(SnackMachineId.class));
-//        this.totalBudget = totalBudget;
-//        this.slots = slots;
+        this.profit = new Money(0);
     }
 
 //    public void setSlots(Set<Slot> slots) {
@@ -87,11 +86,11 @@ public class SnackMachine extends AbstractAggregateRoot<SnackMachineId> implemen
         this.deleted = true;
     }
 
-//    public Money getTotalBudget() {
-//        return totalBudget;
-//    }
+    public Money getProfit() {
+        return profit;
+    }
 //
-//    public void setTotalBudget(Money totalBudget) {
-//        this.totalBudget = totalBudget;
-//    }
+    public void addProfit(Money amount) {
+        profit = profit.add(amount);
+    }
 }

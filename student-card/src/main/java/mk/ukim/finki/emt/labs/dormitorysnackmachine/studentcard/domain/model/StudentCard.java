@@ -7,6 +7,7 @@ import mk.ukim.finki.emt.labs.dormitorysmartsnackmachine.sharedkernel.financial.
 import mk.ukim.finki.emt.labs.dormitorysnackmachine.studentcard.domain.model.identifier.StudentCardId;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "student_card")
@@ -14,11 +15,16 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
     @Version
     private Long version;
 
-    private String name;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "name", column = @Column(name = "name", nullable = false)),
+            @AttributeOverride(name = "surname", column = @Column(name = "surname", nullable = false)),
+    })
+    private FullName fullName;
 
-    private String surname;
-
-    private int numberOfPurchases;
+    @Embedded
+    @AttributeOverride(name = "numberOfPurchases", column = @Column(name = "number_of_purchases", nullable = false))
+    private PurchaseNumber purchaseNumber;
 
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "balance"))
@@ -33,10 +39,9 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
 
     public StudentCard(StudentCardId studentCardId, String name, String surname, Money balance){
         super(studentCardId);
-        this.name = name;
-        this.surname = surname;
-        this.balance = balance;
-        numberOfPurchases = 0;
+        this.fullName = new FullName(name, surname);
+        this.balance = Objects.requireNonNull(balance, "balance cannot be null");
+        purchaseNumber = new PurchaseNumber(0);
     }
 
     @Override
@@ -63,16 +68,16 @@ public class StudentCard extends AbstractAggregateRoot<StudentCardId> implements
     }
 
     public void subtractBalance(Money money){
-        if(numberOfPurchases != 10){
+        if(purchaseNumber.getNumberOfPurchases() != 10){
             balance = balance.subtract(money);
         }
     }
 
     public void addPurchasesPerOne(){
-        numberOfPurchases = (numberOfPurchases + 1)%11;
+        purchaseNumber = purchaseNumber.addOne();
     }
 
-    public int getNumberOfPurchases() {
-        return numberOfPurchases;
+    public PurchaseNumber getPurchaseNumber() {
+        return purchaseNumber;
     }
 }

@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -86,6 +87,9 @@ public class SnackMachineService {
         }
 
         var newPurchase = purchaseRepository.saveAndFlush(toDomainModel(purchaseDto, slot));
+        SnackMachine snackMachine = snackMachineRepository.findAll().stream().findFirst().get();
+        snackMachine.addProfit(newPurchase.getAmount());
+        snackMachineRepository.save(snackMachine);
 
         applicationEventPublisher.publishEvent(new PurchaseForSnackCreated(newPurchase.id(), newPurchase.getOccurredOn(), slot.getSnackId()));
         applicationEventPublisher.publishEvent(new PurchaseForStudentCardCreated(newPurchase.id(), newPurchase.getOccurredOn(), new StudentCardId(purchaseDto.studentCardId), slot.getPrice()));
@@ -98,5 +102,13 @@ public class SnackMachineService {
         SnackMachine snackmachine = snackMachineRepository.findAll().stream().findFirst().get();
         var purchase = new Purchase(Instant.now(), slot.getPrice(), new StudentCardId(purchaseDto.studentCardId), slot.getSnackId(), snackmachine.id());
         return purchase;
+    }
+
+    public List<Slot> getAllSlots(){
+        return slotRepository.findAll();
+    }
+
+    public SnackMachine getSnackMachine() {
+        return snackMachineRepository.findAll().stream().findFirst().get();
     }
 }
